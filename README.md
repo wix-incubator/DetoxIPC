@@ -70,6 +70,13 @@ id<ExampleProtocol> remoteProxyObject = _connection.remoteObjectProxy;
 The expected output on the server process should be:
 
 ```
+from inner block
+```
+
+
+And the client process:
+
+```
 from first block
 from second block: (
     Hello,
@@ -79,10 +86,3 @@ from second block: (
     }
 )
 ```
-
-And the client process:
-
-```
-from inner block
-```
-
