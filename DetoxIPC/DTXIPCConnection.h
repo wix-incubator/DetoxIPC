@@ -43,6 +43,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// The registered service name.
 @property (nullable, readonly, copy, nonatomic) NSString *serviceName;
 
+/// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The invalidation handler will also be called if a connection is invalidated from the remote side. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
+///
+/// You may not send messages over the connection from within an invalidation handler block.
+/// 
+/// The invalidationHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the DTXIPCConnection instance inside this block.
+@property(copy) void (^invalidationHandler)(void);
+
 /// The interface that describes messages that are allowed to be received by the exported object on this connection. This value is required if a exported object is set.
 @property(retain, nonatomic) DTXIPCInterface *exportedInterface;
 /// Set an exported object for the connection. Messages sent to the remoteObjectProxy from the other side of the connection will be dispatched to this object. Messages delivered to exported objects are serialized and sent on a non-main thread. The receiver is responsible for handling the messages on a different thread if it is required.

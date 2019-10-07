@@ -175,7 +175,34 @@ static void _DTXIterateProtocols(Protocol* protocol, NSMutableArray* signatures,
 
 @end
 
+static dispatch_queue_t _connectionQueue;
+
 @implementation DTXIPCConnection
+{
+	NSRunLoop* _runLoop;
+}
+
+- (void)_runThread
+{
+	NSThread.currentThread.name = [NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", _serviceName];
+	
+	_runLoop = NSRunLoop.currentRunLoop;
+	
+	[_connection run];
+}
+
+- (void)_commonInit
+{
+	NSPort* port = NSPort.port;
+	
+	_connection = [NSConnection connectionWithReceivePort:port sendPort:nil];
+	[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_mainConnectionDidDie:) name:NSConnectionDidDieNotification object:_connection];
+	_connection.rootObject = self;
+	[_connection registerName:_serviceName];
+	
+	[NSThread detachNewThreadSelector:@selector(_runThread) toTarget:self withObject:nil];
+//	[_connection runInNewThread];
+}
 
 - (instancetype)initWithServiceName:(NSString *)serviceName
 {
@@ -185,10 +212,7 @@ static void _DTXIterateProtocols(Protocol* protocol, NSMutableArray* signatures,
 		_serviceName = serviceName;
 		_slave = NO;
 		
-		_connection = [NSConnection connectionWithReceivePort:NSPort.port sendPort:nil];
-		_connection.rootObject = self;
-		[_connection registerName:_serviceName];
-		[_connection runInNewThread];
+		[self _commonInit];
 	}
 	return self;
 }
@@ -201,22 +225,48 @@ static void _DTXIterateProtocols(Protocol* protocol, NSMutableArray* signatures,
 		_serviceName = [NSString stringWithFormat:@"%@.slave", serviceName];
 		_slave = YES;
 		
-		_connection = [NSConnection connectionWithReceivePort:NSPort.port sendPort:nil];
-		_connection.rootObject = self;
-		[_connection registerName:_serviceName];
-		[_connection runInNewThread];
+		[self _commonInit];
 		
 		_otherConnection = [NSConnection connectionWithRegisteredName:serviceName host:nil];
+		[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_otherConnectionDidDie:) name:NSConnectionDidDieNotification object:_otherConnection];
 		[(id)_otherConnection.rootProxy _slaveDidConnectWithName:_serviceName];
 	}
 	return self;
 }
 
+- (void)_mainConnectionDidDie:(NSNotification*)note
+{
+	[_otherConnection invalidate];
+	
+	dispatch_block_t block = _invalidationHandler;
+	_invalidationHandler = nil;
+	
+	[_runLoop performBlock:^{
+		if(block)
+		{
+			block();
+		}
+		[NSThread exit];
+	}];
+}
+
+- (void)_otherConnectionDidDie:(NSNotification*)note
+{
+	if(_connection.isValid)
+	{
+		[_connection invalidate];
+	}
+}
+
 - (void)invalidate
 {
 	[_connection invalidate];
-	[(id)_otherConnection.rootProxy _remoteDidInvalidate];
 	[_otherConnection invalidate];
+}
+
+- (BOOL)isValid
+{
+	return _connection.isValid && _otherConnection.isValid;
 }
 
 - (id)remoteObjectProxy
@@ -245,12 +295,7 @@ static void _DTXIterateProtocols(Protocol* protocol, NSMutableArray* signatures,
 - (oneway void)_slaveDidConnectWithName:(NSString*)slaveServiceName
 {
 	_otherConnection = [NSConnection connectionWithRegisteredName:slaveServiceName host:nil];
-}
-
-- (oneway void)_remoteDidInvalidate
-{
-	_otherConnection = nil;
-	[_connection invalidate];
+	[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_otherConnectionDidDie:) name:NSConnectionDidDieNotification object:_otherConnection];
 }
 
 - (oneway void)_invokeFromRemote:(NSDictionary*)serializedInvocation

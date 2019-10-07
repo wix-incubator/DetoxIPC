@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSConnection : NSObject
 
+- (void)run;
+
 @property (nullable, retain) id rootObject;
 @property (readonly, getter=isValid) BOOL valid;
 
@@ -23,8 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)registerName:(nullable NSString *) name;
 
+- (void)addRunLoop:(NSRunLoop *)runloop;
+- (void)removeRunLoop:(NSRunLoop *)runloop;
 - (void)runInNewThread;
 
 @end
+
+FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification;
 
 NS_ASSUME_NONNULL_END

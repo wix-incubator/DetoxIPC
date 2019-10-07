@@ -43,7 +43,8 @@
 - (void)forwardInvocation:(NSInvocation *)invocation
 {
 	NSDictionary* serialized = [invocation _dtx_serializedDictionary];
-	
+
+	NSAssert(_connection.isValid, @"Connection %@ is invalid.", _connection);
 	[_connection.otherConnection.rootProxy _invokeFromRemote:serialized];
 }
 

@@ -69,7 +69,6 @@ static id _encodeObject(id object)
 	NSMutableDictionary* encodedObj = [NSMutableDictionary dictionary];
 	
 	if([object isKindOfClass:NSClassFromString(@"NSBlock")])
-	
 	{
 		const char* blockSig = _Block_signature(object);
 		
@@ -283,6 +282,7 @@ static id _decodeObject(NSDictionary* encodedObj, DTXIPCConnection* connection)
 			objc_setAssociatedObject(inv, _DTXRemoteBlockIdentifierKey, remoteIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 			NSDictionary* serialized = [inv _dtx_serializedDictionary];
 
+			NSCAssert(connection.isValid, @"Connection %@ is invalid.", connection);
 			[connection.otherConnection.rootProxy _invokeRemoteBlock:serialized];
 			
 			NSLog(@"%@", inv);
@@ -290,6 +290,7 @@ static id _decodeObject(NSDictionary* encodedObj, DTXIPCConnection* connection)
 		
 		objc_setAssociatedObject(localForwardingBlock, _DTXCleanupIdentifierKey, [_DTXCleanUpHandler cleanUpHandlerWithBlock:^{
 			//This should be called when the block is released. This block is sent to the client code, so if they retain it, so will the remote block. Once the client code releases the block, we will notify the system to clean the remote block.
+			NSCAssert(connection.isValid, @"Connection %@ is invalid.", connection);
 			[connection.otherConnection.rootProxy _cleanupRemoteBlock:remoteIdentifier];
 		}], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 		
