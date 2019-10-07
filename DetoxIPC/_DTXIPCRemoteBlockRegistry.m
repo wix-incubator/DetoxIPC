@@ -6,7 +6,20 @@
 //  Copyright © 2019 LeoNatan. All rights reserved.
 //
 
+/***
+*    ██╗    ██╗ █████╗ ██████╗ ███╗   ██╗██╗███╗   ██╗ ██████╗
+*    ██║    ██║██╔══██╗██╔══██╗████╗  ██║██║████╗  ██║██╔════╝
+*    ██║ █╗ ██║███████║██████╔╝██╔██╗ ██║██║██╔██╗ ██║██║  ███╗
+*    ██║███╗██║██╔══██║██╔══██╗██║╚██╗██║██║██║╚██╗██║██║   ██║
+*    ╚███╔███╔╝██║  ██║██║  ██║██║ ╚████║██║██║ ╚████║╚██████╔╝
+*     ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═══╝ ╚═════╝
+*
+*
+* WARNING: This file compiles with ARC disabled! Take extra care when modifying or adding functionality.
+*/
+
 #import "_DTXIPCRemoteBlockRegistry.h"
+@import ObjectiveC;
 
 static NSMutableDictionary* _registry;
 
@@ -23,7 +36,13 @@ static NSMutableDictionary* _registry;
 + (NSString*)registerRemoteBlock:(id)block
 {
 	NSString* identifier = [NSUUID UUID].UUIDString;
-	_registry[identifier] = block;
+	
+	@autoreleasepool
+	{
+		id copied = _Block_copy(block);
+		_registry[identifier] = [copied autorelease];
+	}
+	
 	return identifier;
 }
 
@@ -34,7 +53,10 @@ static NSMutableDictionary* _registry;
 
 + (oneway void)cleanupRemoteBlock:(NSString*)identifier
 {
-	[_registry removeObjectForKey:identifier];
+	@autoreleasepool
+	{
+		[_registry removeObjectForKey:identifier];
+	}
 }
 
 @end

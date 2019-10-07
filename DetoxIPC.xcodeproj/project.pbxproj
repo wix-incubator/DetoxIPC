@@ -13,7 +13,7 @@
 		39B833DE233A920200DBC1D2 /* _DTXIPCDistantObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */; };
 		39B833DF233A920200DBC1D2 /* _DTXIPCDistantObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B833DD233A920200DBC1D2 /* _DTXIPCDistantObject.m */; };
 		39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFE5233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h */; };
-		39BEEFE8233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFE6233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m */; };
+		39BEEFE8233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFE6233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		39BEEFEC233B994E001C84C3 /* _DTXIPCLocalObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEA233B994E001C84C3 /* _DTXIPCLocalObject.h */; };
 		39BEEFED233B994E001C84C3 /* _DTXIPCLocalObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFEB233B994E001C84C3 /* _DTXIPCLocalObject.m */; };
 		39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEE233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h */; };
