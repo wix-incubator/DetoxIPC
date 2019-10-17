@@ -19,7 +19,19 @@
 */
 
 #import "_DTXIPCRemoteBlockRegistry.h"
+#import "_DTXIPCDistantObject.h"
 @import ObjectiveC;
+@import Darwin;
+
+@interface _DTXRemoteBlockRegistryEntry : NSObject
+@property (nonatomic, strong) NSString* identifier;
+@property (nonatomic, strong) id block;
+@property (nonatomic) NSInteger blockRetainCount;
+@property (nonatomic, strong) _DTXIPCDistantObject* distantObject;
+@end
+@implementation _DTXRemoteBlockRegistryEntry @end
+
+pthread_mutex_t _registryMutex;
 
 static NSMutableDictionary* _registry;
 
@@ -30,32 +42,68 @@ static NSMutableDictionary* _registry;
 	@autoreleasepool
 	{
 		_registry = [NSMutableDictionary new];
+		pthread_mutex_init(&_registryMutex, NULL);
 	}
 }
 
-+ (NSString*)registerRemoteBlock:(id)block
++ (NSString*)registerRemoteBlock:(id)block distantObject:(_DTXIPCDistantObject*)distantObject
 {
+	autoreleasing_lock(&_registryMutex);
+	
 	NSString* identifier = [NSUUID UUID].UUIDString;
 	
 	@autoreleasepool
 	{
 		id copied = _Block_copy(block);
-		_registry[identifier] = [copied autorelease];
+		
+		_DTXRemoteBlockRegistryEntry* entry = [_DTXRemoteBlockRegistryEntry new];
+		entry.identifier = identifier;
+		entry.block = [copied autorelease];
+		entry.blockRetainCount = 1;
+		entry.distantObject = distantObject;
+		[entry.distantObject _enterReplyBlock];
+		
+		_registry[identifier] = entry;
 	}
 	
 	return identifier;
 }
 
-+ (id)remoteBlockForIdentifier:(NSString*)identifier
++ (id)remoteBlockForIdentifier:(NSString*)identifier distantObject:(_DTXIPCDistantObject* __nullable * __nullable)distantObject;
 {
-	return _registry[identifier];
+	autoreleasing_lock(&_registryMutex);
+	
+	_DTXRemoteBlockRegistryEntry* entry = [_registry objectForKey:identifier];
+	if(distantObject != NULL)
+	{
+		*distantObject = entry.distantObject;
+	}
+	return entry.block;
 }
 
-+ (oneway void)cleanupRemoteBlock:(NSString*)identifier
++ (oneway void)retainRemoteBlock:(NSString*)identifier
 {
+	autoreleasing_lock(&_registryMutex);
+	
+	_DTXRemoteBlockRegistryEntry* entry = [_registry objectForKey:identifier];
+	entry.blockRetainCount += 1;
+}
+
++ (oneway void)releaseRemoteBlock:(NSString*)identifier
+{
+	autoreleasing_lock(&_registryMutex);
+	
 	@autoreleasepool
 	{
-		[_registry removeObjectForKey:identifier];
+		_DTXRemoteBlockRegistryEntry* entry = [_registry objectForKey:identifier];
+		entry.blockRetainCount -= 1;
+		
+		if(entry.blockRetainCount == 0)
+		{
+			[entry.distantObject _leavelReplyBlock];
+			
+			[_registry removeObjectForKey:identifier];
+		}
 	}
 }
 

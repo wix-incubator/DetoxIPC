@@ -14,6 +14,7 @@
 - (oneway void)_invokeFromRemote:(NSDictionary*)serializedInvocation;
 - (oneway void)_invokeRemoteBlock:(NSDictionary*)serializedBlock;
 - (oneway void)_cleanupRemoteBlock:(NSString*)identifier;
+- (BOOL)_ping;
 
 @end
 

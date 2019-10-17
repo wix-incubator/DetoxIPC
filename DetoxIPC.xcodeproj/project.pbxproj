@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		393A512C235729B400DFCEF5 /* DTXIPCBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 393A512B2357295F00DFCEF5 /* DTXIPCBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		397D3E41233A2A4000E69D28 /* DTXIPCConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		397D3E42233A2A4000E69D28 /* DTXIPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D3E40233A2A4000E69D28 /* DTXIPCConnection.m */; };
 		39B833DA233A7D7000DBC1D2 /* DetoxIPC.pch in Headers */ = {isa = PBXBuildFile; fileRef = 39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */; };
@@ -14,18 +15,20 @@
 		39B833DF233A920200DBC1D2 /* _DTXIPCDistantObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B833DD233A920200DBC1D2 /* _DTXIPCDistantObject.m */; };
 		39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFE5233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h */; };
 		39BEEFE8233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFE6233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		39BEEFEC233B994E001C84C3 /* _DTXIPCLocalObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEA233B994E001C84C3 /* _DTXIPCLocalObject.h */; };
-		39BEEFED233B994E001C84C3 /* _DTXIPCLocalObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFEB233B994E001C84C3 /* _DTXIPCLocalObject.m */; };
+		39BEEFEC233B994E001C84C3 /* _DTXIPCExportedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEA233B994E001C84C3 /* _DTXIPCExportedObject.h */; };
+		39BEEFED233B994E001C84C3 /* _DTXIPCExportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFEB233B994E001C84C3 /* _DTXIPCExportedObject.m */; };
 		39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEE233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h */; };
 		39BEEFF1233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFEF233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		393A512B2357295F00DFCEF5 /* DTXIPCBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTXIPCBase.h; sourceTree = "<group>"; };
 		3971742D233A38EE00FFE816 /* NSConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSConnection.h; sourceTree = "<group>"; };
 		397D3E2A233A293D00E69D28 /* DetoxIPC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DetoxIPC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		397D3E2E233A293D00E69D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTXIPCConnection.h; sourceTree = "<group>"; };
 		397D3E40233A2A4000E69D28 /* DTXIPCConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTXIPCConnection.m; sourceTree = "<group>"; };
+		39A5CF072358B1A100B905F8 /* NSPortNameServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPortNameServer.h; sourceTree = "<group>"; };
 		39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetoxIPC.pch; sourceTree = "<group>"; };
 		39B833DB233A898400DBC1D2 /* ObjCRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCRuntime.h; sourceTree = "<group>"; };
 		39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DTXIPCDistantObject.h; sourceTree = "<group>"; };
@@ -33,8 +36,8 @@
 		39BEEFE5233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DTXIPCRemoteBlockRegistry.h; sourceTree = "<group>"; };
 		39BEEFE6233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DTXIPCRemoteBlockRegistry.m; sourceTree = "<group>"; };
 		39BEEFE9233B895F001C84C3 /* DTXIPCConnection-Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DTXIPCConnection-Private.h"; sourceTree = "<group>"; };
-		39BEEFEA233B994E001C84C3 /* _DTXIPCLocalObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DTXIPCLocalObject.h; sourceTree = "<group>"; };
-		39BEEFEB233B994E001C84C3 /* _DTXIPCLocalObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DTXIPCLocalObject.m; sourceTree = "<group>"; };
+		39BEEFEA233B994E001C84C3 /* _DTXIPCExportedObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DTXIPCExportedObject.h; sourceTree = "<group>"; };
+		39BEEFEB233B994E001C84C3 /* _DTXIPCExportedObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _DTXIPCExportedObject.m; sourceTree = "<group>"; };
 		39BEEFEE233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSInvocation+DTXRemoteSerialization.h"; sourceTree = "<group>"; };
 		39BEEFEF233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSInvocation+DTXRemoteSerialization.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +75,7 @@
 				397D3E2E233A293D00E69D28 /* Info.plist */,
 				39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */,
 				397D3E44233A2DAB00E69D28 /* Apple */,
+				393A512B2357295F00DFCEF5 /* DTXIPCBase.h */,
 				397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */,
 				39BEEFE9233B895F001C84C3 /* DTXIPCConnection-Private.h */,
 				397D3E40233A2A4000E69D28 /* DTXIPCConnection.m */,
@@ -81,8 +85,8 @@
 				39BEEFEF233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m */,
 				39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */,
 				39B833DD233A920200DBC1D2 /* _DTXIPCDistantObject.m */,
-				39BEEFEA233B994E001C84C3 /* _DTXIPCLocalObject.h */,
-				39BEEFEB233B994E001C84C3 /* _DTXIPCLocalObject.m */,
+				39BEEFEA233B994E001C84C3 /* _DTXIPCExportedObject.h */,
+				39BEEFEB233B994E001C84C3 /* _DTXIPCExportedObject.m */,
 			);
 			path = DetoxIPC;
 			sourceTree = "<group>";
@@ -92,6 +96,7 @@
 			children = (
 				3971742D233A38EE00FFE816 /* NSConnection.h */,
 				39B833DB233A898400DBC1D2 /* ObjCRuntime.h */,
+				39A5CF072358B1A100B905F8 /* NSPortNameServer.h */,
 			);
 			path = Apple;
 			sourceTree = "<group>";
@@ -103,12 +108,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				393A512C235729B400DFCEF5 /* DTXIPCBase.h in Headers */,
 				39B833DE233A920200DBC1D2 /* _DTXIPCDistantObject.h in Headers */,
 				39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */,
 				39B833DA233A7D7000DBC1D2 /* DetoxIPC.pch in Headers */,
 				39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */,
 				397D3E41233A2A4000E69D28 /* DTXIPCConnection.h in Headers */,
-				39BEEFEC233B994E001C84C3 /* _DTXIPCLocalObject.h in Headers */,
+				39BEEFEC233B994E001C84C3 /* _DTXIPCExportedObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				39BEEFED233B994E001C84C3 /* _DTXIPCLocalObject.m in Sources */,
+				39BEEFED233B994E001C84C3 /* _DTXIPCExportedObject.m in Sources */,
 				39BEEFF1233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m in Sources */,
 				39BEEFE8233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m in Sources */,
 				39B833DF233A920200DBC1D2 /* _DTXIPCDistantObject.m in Sources */,

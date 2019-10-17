@@ -8,11 +8,14 @@
 
 #import "DTXIPCConnection-Private.h"
 #import "NSConnection.h"
+#import "NSPortNameServer.h"
 #import "ObjCRuntime.h"
 #import "_DTXIPCDistantObject.h"
-#import "_DTXIPCLocalObject.h"
+#import "_DTXIPCExportedObject.h"
 #import "_DTXIPCRemoteBlockRegistry.h"
 @import ObjectiveC;
+
+NSErrorDomain const DTXIPCErrorDomain = @"DTXIPCErrorDomain";
 
 @interface DTXIPCInterface ()
 
@@ -179,29 +182,35 @@ static dispatch_queue_t _connectionQueue;
 
 @implementation DTXIPCConnection
 {
+	dispatch_queue_t _dispatchQueue;
 	NSRunLoop* _runLoop;
+	NSString* _actualServiceName;
 }
 
-- (void)_runThread
+- (void)_runQueue
 {
-	NSThread.currentThread.name = [NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", _serviceName];
-	
 	_runLoop = NSRunLoop.currentRunLoop;
 	
 	[_connection run];
 }
 
-- (void)_commonInit
+- (BOOL)_commonInit
 {
 	NSPort* port = NSPort.port;
+	if([NSPortNameServer.systemDefaultPortNameServer registerPort:port name:_actualServiceName] == NO)
+	{
+		return NO;
+	}
 	
 	_connection = [NSConnection connectionWithReceivePort:port sendPort:nil];
 	[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_mainConnectionDidDie:) name:NSConnectionDidDieNotification object:_connection];
 	_connection.rootObject = self;
-	[_connection registerName:_serviceName];
 	
-	[NSThread detachNewThreadSelector:@selector(_runThread) toTarget:self withObject:nil];
-//	[_connection runInNewThread];
+	dispatch_async(_dispatchQueue, ^{
+		[self _runQueue];
+	});
+	
+	return YES;
 }
 
 - (instancetype)initWithServiceName:(NSString *)serviceName
@@ -210,28 +219,31 @@ static dispatch_queue_t _connectionQueue;
 	if(self)
 	{
 		_serviceName = serviceName;
+		_actualServiceName = serviceName;
 		_slave = NO;
 		
-		[self _commonInit];
+		_dispatchQueue = dispatch_queue_create([NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", serviceName].UTF8String, NULL);
+		
+		//Attempt becoming a master
+		if([self _commonInit] == NO)
+		{
+			_actualServiceName = [NSString stringWithFormat:@"%@.slave", serviceName];
+			_slave = YES;
+			
+			//Attempt becoming the slave
+			NSAssert([self _commonInit] == YES, @"The service “%@” already has ", serviceName);
+			
+			_otherConnection = [NSConnection connectionWithRegisteredName:serviceName host:nil];
+			[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_otherConnectionDidDie:) name:NSConnectionDidDieNotification object:_otherConnection];
+			[(id)_otherConnection.rootProxy _slaveDidConnectWithName:_actualServiceName];
+		}
 	}
 	return self;
 }
 
 - (instancetype)initWithRegisteredServiceName:(NSString *)serviceName
 {
-	self = [super init];
-	if(self)
-	{
-		_serviceName = [NSString stringWithFormat:@"%@.slave", serviceName];
-		_slave = YES;
-		
-		[self _commonInit];
-		
-		_otherConnection = [NSConnection connectionWithRegisteredName:serviceName host:nil];
-		[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_otherConnectionDidDie:) name:NSConnectionDidDieNotification object:_otherConnection];
-		[(id)_otherConnection.rootProxy _slaveDidConnectWithName:_serviceName];
-	}
-	return self;
+	return [self initWithServiceName:serviceName];
 }
 
 - (void)_mainConnectionDidDie:(NSNotification*)note
@@ -246,7 +258,8 @@ static dispatch_queue_t _connectionQueue;
 		{
 			block();
 		}
-		[NSThread exit];
+		
+		CFRunLoopStop(CFRunLoopGetCurrent());
 	}];
 }
 
@@ -271,17 +284,17 @@ static dispatch_queue_t _connectionQueue;
 
 - (id)remoteObjectProxy
 {
-	return [_DTXIPCDistantObject _distantObjectWithConnection:self remoteInterface:self.remoteObjectInterface synchronous:NO errorBlock:nil];
+	return [_DTXIPCDistantObject _distantObjectWithConnection:self synchronous:NO errorBlock:nil];
 }
 
 - (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError * _Nonnull))handler
 {
-	return [_DTXIPCDistantObject _distantObjectWithConnection:self remoteInterface:self.remoteObjectInterface synchronous:NO errorBlock:handler];
+	return [_DTXIPCDistantObject _distantObjectWithConnection:self synchronous:NO errorBlock:handler];
 }
 
 - (id)synchronousRemoteObjectProxyWithErrorHandler:(void (^)(NSError * _Nonnull))handler
 {
-	return [_DTXIPCDistantObject _distantObjectWithConnection:self remoteInterface:self.remoteObjectInterface synchronous:YES errorBlock:handler];
+	return [_DTXIPCDistantObject _distantObjectWithConnection:self synchronous:YES errorBlock:handler];
 }
 
 - (void)setExportedObject:(id)exportedObject
@@ -300,20 +313,29 @@ static dispatch_queue_t _connectionQueue;
 
 - (oneway void)_invokeFromRemote:(NSDictionary*)serializedInvocation
 {
-	_DTXIPCLocalObject* localObj = [_DTXIPCLocalObject _localObjectWithObject:self.exportedObject connection:self localInterface:self.exportedInterface];
-	[localObj invokeWithSerializedInvocation:serializedInvocation];
+	_DTXIPCExportedObject* exportedObj = [_DTXIPCExportedObject _exportedObjectWithObject:self.exportedObject connection:self serializedInvocation:serializedInvocation];
+	[exportedObj invoke];
 }
 
 - (oneway void)_invokeRemoteBlock:(NSDictionary*)serializedBlock
 {
-	id localBlock = [_DTXIPCRemoteBlockRegistry remoteBlockForIdentifier:serializedBlock[@"remoteBlockIdentifier"]];
-	_DTXIPCLocalObject* localObj = [_DTXIPCLocalObject _localObjectWithObject:localBlock connection:self localInterface:self.exportedInterface];
-	[localObj invokeWithSerializedInvocation:serializedBlock];
+	_DTXIPCDistantObject* distantObject;
+	id localBlock = [_DTXIPCRemoteBlockRegistry remoteBlockForIdentifier:serializedBlock[@"remoteBlockIdentifier"] distantObject:&distantObject];
+	_DTXIPCExportedObject* exportedObj = [_DTXIPCExportedObject _exportedObjectWithObject:localBlock connection:self serializedInvocation:serializedBlock];
+	if([distantObject _enqueueSynchronousExportedObjectInvocation:exportedObj] == NO)
+	{
+		[exportedObj invoke];
+	}
 }
 
 - (oneway void)_cleanupRemoteBlock:(NSString*)identifier
 {
-	[_DTXIPCRemoteBlockRegistry cleanupRemoteBlock:identifier];
+	[_DTXIPCRemoteBlockRegistry releaseRemoteBlock:identifier];
+}
+
+- (BOOL)_ping
+{
+	return YES;
 }
 
 @end

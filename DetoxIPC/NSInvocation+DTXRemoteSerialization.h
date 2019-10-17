@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @class DTXIPCConnection;
+@class _DTXIPCDistantObject;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +16,7 @@ extern void* _DTXRemoteBlockIdentifierKey;
 
 @interface NSInvocation (DTXRemoteSerialization)
 
-- (NSDictionary*)_dtx_serializedDictionary;
+- (NSDictionary*)_dtx_serializedDictionaryForDistantObject:(nullable _DTXIPCDistantObject*)distantObject;
 
 + (instancetype)_dtx_invocationWithSerializedDictionary:(NSDictionary*)serialized remoteConnection:(DTXIPCConnection*)connection;
 

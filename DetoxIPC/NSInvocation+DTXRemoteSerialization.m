@@ -22,6 +22,7 @@
 #import "_DTXIPCRemoteBlockRegistry.h"
 #import "DTXIPCConnection-Private.h"
 #import "NSConnection.h"
+#import "_DTXIPCDistantObject.h"
 @import UIKit;
 @import ObjectiveC;
 
@@ -59,7 +60,7 @@ extern id __NSMakeSpecialForwardingCaptureBlock(const char *signature, void (^ha
 @implementation NSInvocation (DTXRemoteSerialization)
 
 //Returns autoreleased encoded object
-static id _encodeObject(id object)
+static id _encodeObject(id object, _DTXIPCDistantObject* distantObject)
 {
 	if(object == nil)
 	{
@@ -81,7 +82,7 @@ static id _encodeObject(id object)
 		encodedObj[@"type"] = @"block";
 		encodedObj[@"signature"] = @(blockSig);
 		//Register the original block in the registry.
-		encodedObj[@"remoteIdentifier"] = [_DTXIPCRemoteBlockRegistry registerRemoteBlock:object];
+		encodedObj[@"remoteIdentifier"] = [_DTXIPCRemoteBlockRegistry registerRemoteBlock:object distantObject:distantObject];
 	}
 	else
 	{
@@ -109,7 +110,7 @@ static id _encodeObject(id object)
 	return encodedObj;
 }
 
-static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialized, NSUInteger firstArg)
+static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialized, NSUInteger firstArg, _DTXIPCDistantObject* distantObject)
 {
 	NSMethodSignature* signature = self.methodSignature;
 	NSMutableArray* arguments = [NSMutableArray arrayWithCapacity:signature.numberOfArguments];
@@ -131,7 +132,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				double value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -141,7 +142,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				float value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -151,7 +152,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				int value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -161,7 +162,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				unsigned value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -171,7 +172,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				char value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -181,7 +182,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				BOOL value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -191,7 +192,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				long value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -201,7 +202,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				unsigned long value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(@(value))];
+				[arguments addObject:_encodeObject(@(value), distantObject)];
 				break;
 			}
 				
@@ -211,7 +212,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 				id value;
 				[self getArgument:&value atIndex:i];
 				
-				[arguments addObject:_encodeObject(value)];
+				[arguments addObject:_encodeObject(value, distantObject)];
 				break;
 			}
 				
@@ -222,7 +223,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 					NSRange value;
 					[self getArgument:&value atIndex:i];
 					
-					[arguments addObject:_encodeObject([NSValue valueWithRange:value])];
+					[arguments addObject:_encodeObject([NSValue valueWithRange:value], distantObject)];
 					break;
 				}
 				else if(!strcmp(type, @encode(CGSize)))
@@ -230,7 +231,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 					CGSize value;
 					[self getArgument:&value atIndex:i];
 					
-					[arguments addObject:_encodeObject(@(value))];
+					[arguments addObject:_encodeObject(@(value), distantObject)];
 					break;
 				}
 				
@@ -245,7 +246,7 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 }
 
 //Returns autoreleased dictionary
-- (NSDictionary*)_dtx_serializedDictionary
+- (NSDictionary*)_dtx_serializedDictionaryForDistantObject:(_DTXIPCDistantObject*)distantObject
 {
 	NSMutableDictionary* serialized = [NSMutableDictionary dictionary];
 	serialized[@"types"] = [self.methodSignature valueForKey:@"typeString"];
@@ -256,12 +257,12 @@ static void _encodeInvocation(NSInvocation* self, NSMutableDictionary* serialize
 		NSParameterAssert(blockId != nil);
 		serialized[@"remoteBlockIdentifier"] = blockId;
 		serialized[@"blockCall"] = @YES;
-		_encodeInvocation(self, serialized, 1);
+		_encodeInvocation(self, serialized, 1, distantObject);
 	}
 	else
 	{
 		serialized[@"selector"] = NSStringFromSelector(self.selector);
-		_encodeInvocation(self, serialized, 2);
+		_encodeInvocation(self, serialized, 2, distantObject);
 	}
 	
 	return serialized;
@@ -280,7 +281,7 @@ static id _decodeObject(NSDictionary* encodedObj, DTXIPCConnection* connection)
 		
 		id localForwardingBlock = __NSMakeSpecialForwardingCaptureBlock(signature, ^(NSInvocation *inv) {
 			objc_setAssociatedObject(inv, _DTXRemoteBlockIdentifierKey, remoteIdentifier, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-			NSDictionary* serialized = [inv _dtx_serializedDictionary];
+			NSDictionary* serialized = [inv _dtx_serializedDictionaryForDistantObject:nil];
 
 			NSCAssert(connection.isValid, @"Connection %@ is invalid.", connection);
 			[connection.otherConnection.rootProxy _invokeRemoteBlock:serialized];
@@ -431,7 +432,7 @@ static void _decodeInvocation(NSDictionary* serialized, NSInvocation* invocation
 		}
 		
 		invocationClass = NSClassFromString(@"NSBlockInvocation");
-		localBlock = [_DTXIPCRemoteBlockRegistry remoteBlockForIdentifier:blockId];
+		localBlock = [_DTXIPCRemoteBlockRegistry remoteBlockForIdentifier:blockId distantObject:NULL];
 		methodSignature = [NSMethodSignature signatureWithObjCTypes:_Block_signature(localBlock)];
 	}
 	else

@@ -1,6 +1,6 @@
 # DetoxIPC
 
-DetoxIPC is an asynchronous, bi-directional inter-process remote invocation library for Apple platforms with an interface similar to Apple's `NSXPCConnection` API.
+DetoxIPC is an asynchronous, bi-directional inter-process remote invocation library for Apple platforms with an API similar to Apple's `NSXPCConnection`.
 
 Once a connection is established, messages sent to remote proxies are serialized over mach ports to their remote counterparts. Block parameters are supported, and their lifetime is mirrored to their remote proxy counterparts (if a proxy block is retained and remains active for use, so is the local proxy).
 
@@ -9,6 +9,8 @@ Once a connection is established, messages sent to remote proxies are serialized
 ## Usage
 
 Include the project in your projects and link it.
+
+Read the `DTXIPCConnection.h` header for full documentation.
 
 First, create a common protocol, which will be used to define the interface between remote objects.
 
@@ -50,7 +52,7 @@ _connection.exportedObject = [[MyObject alloc] init];
 On the client process, connect to the registered named service, set the remote object interface and obtain a remote proxy object. You can now use this proxy object as if it is an instance of the remote object.
 
 ```objc
-_connection = [[DTXIPCConnection alloc] initWithRegisteredServiceName:@"MyService"];
+_connection = [[DTXIPCConnection alloc] initWithServiceName:@"MyService"];
 _connection.remoteObjectInterface = [DTXIPCInterface interfaceWithProtocol:@protocol(ExampleProtocol)];
 
 id<ExampleProtocol> remoteProxyObject = _connection.remoteObjectProxy;

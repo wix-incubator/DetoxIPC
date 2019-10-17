@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <DetoxIPC/DTXIPCBase.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -38,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Initialize a DTXIPCConnection that will connect to specified already-registered service name.
 /// @param serviceName The service name to connect to
-- (instancetype)initWithRegisteredServiceName:(NSString*)serviceName;
+- (instancetype)initWithRegisteredServiceName:(NSString*)serviceName DTXIPC_DEPRECATED_API("Use initWithServiceName:");
 
 /// The registered service name.
 @property (nullable, readonly, copy, nonatomic) NSString *serviceName;
@@ -61,9 +62,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns a proxy object with no error handling block. Messages sent to the proxy object will be sent over the wire to the other side of the connection. All messages must be 'oneway void' return type. Control may be returned to the caller before the message is sent.
 @property(readonly, retain, nonatomic) id remoteObjectProxy;
 /// Returns a proxy object which will invoke the error handling block if an error occurs on the connection. Messages sent to the proxy object will be sent over the wire to the other side of the connection. All messages must be 'oneway void' return type. Control may be returned to the caller before the message is sent.
-- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler NS_UNAVAILABLE;
+- (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 /// Make a synchronous IPC call instead of the default async behavior. The error handler block and block arguments will be invoked on the calling thread before the message to the proxy returns, instead of on the queue for the connection.
-- (id)synchronousRemoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler NS_UNAVAILABLE;
+///
+/// Synchronous calls will block until the remote has released all argument blocks.
+///
+/// You must not send messages from multiple threads to synchronous proxies.
+- (id)synchronousRemoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 
 /// Invalidate the connection. All outstanding error handling blocks will be called on the message handling queue. The connection must be invalidated before it is deallocated. After a connection is invalidated, no more messages may be sent or received.
 - (void)invalidate;

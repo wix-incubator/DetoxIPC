@@ -20,5 +20,6 @@ static void defer_cleanup_block(__strong void(^*block)(void)) {
 #pragma clang diagnostic pop
 
 #define free_if_needed(x) do { if(x != NULL) { free(x); }} while(0)
+#define autoreleasing_lock(lock) do { pthread_mutex_lock(lock); dtx_defer { pthread_mutex_unlock(lock); }; } while(0)
 
 #endif /* Detox_pch */
