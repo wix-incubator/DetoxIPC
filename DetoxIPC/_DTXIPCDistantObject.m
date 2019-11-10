@@ -42,6 +42,11 @@
 	return rv;
 }
 
+- (void)dealloc
+{
+	pthread_mutex_destroy(&_pendingMutex);
+}
+
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
 	NSMethodSignature* s = [super methodSignatureForSelector:aSelector];
