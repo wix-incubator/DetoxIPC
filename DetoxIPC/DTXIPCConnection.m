@@ -222,7 +222,7 @@ static dispatch_queue_t _connectionQueue;
 		_actualServiceName = serviceName;
 		_slave = NO;
 		
-		_dispatchQueue = dispatch_queue_create([NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", serviceName].UTF8String, NULL);
+		_dispatchQueue = dispatch_queue_create([NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", serviceName].UTF8String, dispatch_queue_attr_make_with_autorelease_frequency(NULL, DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM));
 		
 		//Attempt becoming a master
 		if([self _commonInit] == NO)
