@@ -105,6 +105,7 @@
 			[_pendingRemoteBlocks enumerateObjectsUsingBlock:^(_DTXIPCExportedObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 				[obj invoke];
 			}];
+			[_pendingRemoteBlocks removeAllObjects];
 		}
 		
 		_pendingDispatchGroup = nil;
