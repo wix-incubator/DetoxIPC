@@ -101,7 +101,7 @@
 
 		if(didEndWaiting)
 		{
-			autoreleasing_lock(&_pendingMutex);
+			pthread_mutex_lock_deferred_unlock(&_pendingMutex);
 			[_pendingRemoteBlocks enumerateObjectsUsingBlock:^(_DTXIPCExportedObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 				[obj invoke];
 			}];
@@ -139,7 +139,7 @@
 		return NO;
 	}
 	
-	autoreleasing_lock(&_pendingMutex);
+	pthread_mutex_lock_deferred_unlock(&_pendingMutex);
 	[_pendingRemoteBlocks addObject:object];
 	
 	return YES;

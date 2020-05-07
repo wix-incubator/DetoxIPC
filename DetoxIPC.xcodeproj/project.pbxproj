@@ -10,6 +10,7 @@
 		393A512C235729B400DFCEF5 /* DTXIPCBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 393A512B2357295F00DFCEF5 /* DTXIPCBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		397D3E41233A2A4000E69D28 /* DTXIPCConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		397D3E42233A2A4000E69D28 /* DTXIPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D3E40233A2A4000E69D28 /* DTXIPCConnection.m */; };
+		39B71FC024641E7400CC9A88 /* Swiftier.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FBF24641E7400CC9A88 /* Swiftier.h */; };
 		39B833DA233A7D7000DBC1D2 /* DetoxIPC.pch in Headers */ = {isa = PBXBuildFile; fileRef = 39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */; };
 		39B833DE233A920200DBC1D2 /* _DTXIPCDistantObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */; };
 		39B833DF233A920200DBC1D2 /* _DTXIPCDistantObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B833DD233A920200DBC1D2 /* _DTXIPCDistantObject.m */; };
@@ -29,6 +30,7 @@
 		397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTXIPCConnection.h; sourceTree = "<group>"; };
 		397D3E40233A2A4000E69D28 /* DTXIPCConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTXIPCConnection.m; sourceTree = "<group>"; };
 		39A5CF072358B1A100B905F8 /* NSPortNameServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSPortNameServer.h; sourceTree = "<group>"; };
+		39B71FBF24641E7400CC9A88 /* Swiftier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Swiftier.h; path = DTXObjectiveCHelpers/Swiftier.h; sourceTree = SOURCE_ROOT; };
 		39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetoxIPC.pch; sourceTree = "<group>"; };
 		39B833DB233A898400DBC1D2 /* ObjCRuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjCRuntime.h; sourceTree = "<group>"; };
 		39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _DTXIPCDistantObject.h; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				397D3E2E233A293D00E69D28 /* Info.plist */,
 				39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */,
+				39B71FBF24641E7400CC9A88 /* Swiftier.h */,
 				397D3E44233A2DAB00E69D28 /* Apple */,
 				393A512B2357295F00DFCEF5 /* DTXIPCBase.h */,
 				397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */,
@@ -113,6 +116,7 @@
 				39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */,
 				39B833DA233A7D7000DBC1D2 /* DetoxIPC.pch in Headers */,
 				39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */,
+				39B71FC024641E7400CC9A88 /* Swiftier.h in Headers */,
 				397D3E41233A2A4000E69D28 /* DTXIPCConnection.h in Headers */,
 				39BEEFEC233B994E001C84C3 /* _DTXIPCExportedObject.h in Headers */,
 			);

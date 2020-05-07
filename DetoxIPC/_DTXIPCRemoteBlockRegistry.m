@@ -48,7 +48,7 @@ static NSMutableDictionary* _registry;
 
 + (NSString*)registerRemoteBlock:(id)block distantObject:(_DTXIPCDistantObject*)distantObject
 {
-	autoreleasing_lock(&_registryMutex);
+	pthread_mutex_lock_deferred_unlock(&_registryMutex);
 	
 	NSString* identifier = [NSUUID UUID].UUIDString;
 	
@@ -71,7 +71,7 @@ static NSMutableDictionary* _registry;
 
 + (id)remoteBlockForIdentifier:(NSString*)identifier distantObject:(_DTXIPCDistantObject* __nullable * __nullable)distantObject;
 {
-	autoreleasing_lock(&_registryMutex);
+	pthread_mutex_lock_deferred_unlock(&_registryMutex);
 	
 	_DTXRemoteBlockRegistryEntry* entry = [_registry objectForKey:identifier];
 	if(distantObject != NULL)
@@ -83,7 +83,7 @@ static NSMutableDictionary* _registry;
 
 + (oneway void)retainRemoteBlock:(NSString*)identifier
 {
-	autoreleasing_lock(&_registryMutex);
+	pthread_mutex_lock_deferred_unlock(&_registryMutex);
 	
 	_DTXRemoteBlockRegistryEntry* entry = [_registry objectForKey:identifier];
 	entry.blockRetainCount += 1;
@@ -91,7 +91,7 @@ static NSMutableDictionary* _registry;
 
 + (oneway void)releaseRemoteBlock:(NSString*)identifier
 {
-	autoreleasing_lock(&_registryMutex);
+	pthread_mutex_lock_deferred_unlock(&_registryMutex);
 	
 	@autoreleasepool
 	{
