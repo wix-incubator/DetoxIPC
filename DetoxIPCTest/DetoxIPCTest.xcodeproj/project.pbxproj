@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3968B53725C08006000CB6CB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968B53625C08006000CB6CB /* AppDelegate.m */; };
+		3968B53A25C08006000CB6CB /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968B53925C08006000CB6CB /* SceneDelegate.m */; };
+		3968B53D25C08006000CB6CB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968B53C25C08006000CB6CB /* ViewController.m */; };
+		3968B54025C08006000CB6CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3968B53E25C08006000CB6CB /* Main.storyboard */; };
+		3968B54225C08008000CB6CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3968B54125C08008000CB6CB /* Assets.xcassets */; };
+		3968B54525C08008000CB6CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3968B54325C08008000CB6CB /* LaunchScreen.storyboard */; };
+		3968B54825C08008000CB6CB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968B54725C08008000CB6CB /* main.m */; };
+		3968B55E25C08043000CB6CB /* DetoxIPCTestUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3968B55D25C08043000CB6CB /* DetoxIPCTestUITests.m */; };
+		3968B56C25C081A0000CB6CB /* DetoxIPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3968B55425C08029000CB6CB /* DetoxIPC.framework */; };
+		3968B56D25C081A0000CB6CB /* DetoxIPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3968B55425C08029000CB6CB /* DetoxIPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		3968B57325C081BD000CB6CB /* DetoxIPC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3968B55425C08029000CB6CB /* DetoxIPC.framework */; };
+		3968B57525C081D8000CB6CB /* DetoxIPC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3968B55425C08029000CB6CB /* DetoxIPC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3968B55325C08029000CB6CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3968B54F25C08028000CB6CB /* DetoxIPC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 397D3E2A233A293D00E69D28;
+			remoteInfo = DetoxIPC;
+		};
+		3968B56025C08043000CB6CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3968B52A25C08006000CB6CB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3968B53125C08006000CB6CB;
+			remoteInfo = DetoxIPCTest;
+		};
+		3968B56F25C081A8000CB6CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3968B54F25C08028000CB6CB /* DetoxIPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 397D3E29233A293D00E69D28;
+			remoteInfo = DetoxIPC;
+		};
+		3968B57125C081AD000CB6CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3968B54F25C08028000CB6CB /* DetoxIPC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 397D3E29233A293D00E69D28;
+			remoteInfo = DetoxIPC;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3968B56E25C081A0000CB6CB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3968B56D25C081A0000CB6CB /* DetoxIPC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3968B57425C081C5000CB6CB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				3968B57525C081D8000CB6CB /* DetoxIPC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3968B53225C08006000CB6CB /* DetoxIPCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DetoxIPCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3968B53525C08006000CB6CB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3968B53625C08006000CB6CB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3968B53825C08006000CB6CB /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		3968B53925C08006000CB6CB /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		3968B53B25C08006000CB6CB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3968B53C25C08006000CB6CB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3968B53F25C08006000CB6CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3968B54125C08008000CB6CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3968B54425C08008000CB6CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3968B54625C08008000CB6CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3968B54725C08008000CB6CB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3968B54F25C08028000CB6CB /* DetoxIPC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = DetoxIPC.xcodeproj; path = ../DetoxIPC.xcodeproj; sourceTree = "<group>"; };
+		3968B55B25C08043000CB6CB /* DetoxIPCTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DetoxIPCTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3968B55D25C08043000CB6CB /* DetoxIPCTestUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetoxIPCTestUITests.m; sourceTree = "<group>"; };
+		3968B55F25C08043000CB6CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3968B59325C08941000CB6CB /* TestProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestProtocol.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3968B52F25C08006000CB6CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3968B56C25C081A0000CB6CB /* DetoxIPC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3968B55825C08043000CB6CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3968B57325C081BD000CB6CB /* DetoxIPC.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3968B52925C08006000CB6CB = {
+			isa = PBXGroup;
+			children = (
+				3968B59325C08941000CB6CB /* TestProtocol.h */,
+				3968B54F25C08028000CB6CB /* DetoxIPC.xcodeproj */,
+				3968B53425C08006000CB6CB /* DetoxIPCTest */,
+				3968B55C25C08043000CB6CB /* DetoxIPCTestUITests */,
+				3968B53325C08006000CB6CB /* Products */,
+				3968B56B25C081A0000CB6CB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3968B53325C08006000CB6CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3968B53225C08006000CB6CB /* DetoxIPCTest.app */,
+				3968B55B25C08043000CB6CB /* DetoxIPCTestUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3968B53425C08006000CB6CB /* DetoxIPCTest */ = {
+			isa = PBXGroup;
+			children = (
+				3968B53525C08006000CB6CB /* AppDelegate.h */,
+				3968B53625C08006000CB6CB /* AppDelegate.m */,
+				3968B53825C08006000CB6CB /* SceneDelegate.h */,
+				3968B53925C08006000CB6CB /* SceneDelegate.m */,
+				3968B53B25C08006000CB6CB /* ViewController.h */,
+				3968B53C25C08006000CB6CB /* ViewController.m */,
+				3968B53E25C08006000CB6CB /* Main.storyboard */,
+				3968B54125C08008000CB6CB /* Assets.xcassets */,
+				3968B54325C08008000CB6CB /* LaunchScreen.storyboard */,
+				3968B54625C08008000CB6CB /* Info.plist */,
+				3968B54725C08008000CB6CB /* main.m */,
+			);
+			path = DetoxIPCTest;
+			sourceTree = "<group>";
+		};
+		3968B55025C08028000CB6CB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3968B55425C08029000CB6CB /* DetoxIPC.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3968B55C25C08043000CB6CB /* DetoxIPCTestUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3968B55D25C08043000CB6CB /* DetoxIPCTestUITests.m */,
+				3968B55F25C08043000CB6CB /* Info.plist */,
+			);
+			path = DetoxIPCTestUITests;
+			sourceTree = "<group>";
+		};
+		3968B56B25C081A0000CB6CB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3968B53125C08006000CB6CB /* DetoxIPCTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3968B54B25C08008000CB6CB /* Build configuration list for PBXNativeTarget "DetoxIPCTest" */;
+			buildPhases = (
+				3968B52E25C08006000CB6CB /* Sources */,
+				3968B52F25C08006000CB6CB /* Frameworks */,
+				3968B53025C08006000CB6CB /* Resources */,
+				3968B56E25C081A0000CB6CB /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3968B57025C081A8000CB6CB /* PBXTargetDependency */,
+			);
+			name = DetoxIPCTest;
+			productName = DetoxIPCTest;
+			productReference = 3968B53225C08006000CB6CB /* DetoxIPCTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3968B55A25C08043000CB6CB /* DetoxIPCTestUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3968B56225C08043000CB6CB /* Build configuration list for PBXNativeTarget "DetoxIPCTestUITests" */;
+			buildPhases = (
+				3968B55725C08043000CB6CB /* Sources */,
+				3968B55825C08043000CB6CB /* Frameworks */,
+				3968B55925C08043000CB6CB /* Resources */,
+				3968B57425C081C5000CB6CB /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3968B57225C081AD000CB6CB /* PBXTargetDependency */,
+				3968B56125C08043000CB6CB /* PBXTargetDependency */,
+			);
+			name = DetoxIPCTestUITests;
+			productName = DetoxIPCTestUITests;
+			productReference = 3968B55B25C08043000CB6CB /* DetoxIPCTestUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3968B52A25C08006000CB6CB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					3968B53125C08006000CB6CB = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					3968B55A25C08043000CB6CB = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 3968B53125C08006000CB6CB;
+					};
+				};
+			};
+			buildConfigurationList = 3968B52D25C08006000CB6CB /* Build configuration list for PBXProject "DetoxIPCTest" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3968B52925C08006000CB6CB;
+			productRefGroup = 3968B53325C08006000CB6CB /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3968B55025C08028000CB6CB /* Products */;
+					ProjectRef = 3968B54F25C08028000CB6CB /* DetoxIPC.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				3968B53125C08006000CB6CB /* DetoxIPCTest */,
+				3968B55A25C08043000CB6CB /* DetoxIPCTestUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		3968B55425C08029000CB6CB /* DetoxIPC.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = DetoxIPC.framework;
+			remoteRef = 3968B55325C08029000CB6CB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3968B53025C08006000CB6CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3968B54525C08008000CB6CB /* LaunchScreen.storyboard in Resources */,
+				3968B54225C08008000CB6CB /* Assets.xcassets in Resources */,
+				3968B54025C08006000CB6CB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3968B55925C08043000CB6CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3968B52E25C08006000CB6CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3968B53D25C08006000CB6CB /* ViewController.m in Sources */,
+				3968B53725C08006000CB6CB /* AppDelegate.m in Sources */,
+				3968B54825C08008000CB6CB /* main.m in Sources */,
+				3968B53A25C08006000CB6CB /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3968B55725C08043000CB6CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3968B55E25C08043000CB6CB /* DetoxIPCTestUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3968B56125C08043000CB6CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3968B53125C08006000CB6CB /* DetoxIPCTest */;
+			targetProxy = 3968B56025C08043000CB6CB /* PBXContainerItemProxy */;
+		};
+		3968B57025C081A8000CB6CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DetoxIPC;
+			targetProxy = 3968B56F25C081A8000CB6CB /* PBXContainerItemProxy */;
+		};
+		3968B57225C081AD000CB6CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = DetoxIPC;
+			targetProxy = 3968B57125C081AD000CB6CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3968B53E25C08006000CB6CB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3968B53F25C08006000CB6CB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3968B54325C08008000CB6CB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3968B54425C08008000CB6CB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3968B54925C08008000CB6CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3968B54A25C08008000CB6CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3968B54C25C08008000CB6CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XPHGA2FMQQ;
+				INFOPLIST_FILE = DetoxIPCTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wix.DetoxIPCTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3968B54D25C08008000CB6CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XPHGA2FMQQ;
+				INFOPLIST_FILE = DetoxIPCTest/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wix.DetoxIPCTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3968B56325C08043000CB6CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XPHGA2FMQQ;
+				INFOPLIST_FILE = DetoxIPCTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wix.DetoxIPCTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DetoxIPCTest;
+			};
+			name = Debug;
+		};
+		3968B56425C08043000CB6CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XPHGA2FMQQ;
+				INFOPLIST_FILE = DetoxIPCTestUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.wix.DetoxIPCTestUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DetoxIPCTest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3968B52D25C08006000CB6CB /* Build configuration list for PBXProject "DetoxIPCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3968B54925C08008000CB6CB /* Debug */,
+				3968B54A25C08008000CB6CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3968B54B25C08008000CB6CB /* Build configuration list for PBXNativeTarget "DetoxIPCTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3968B54C25C08008000CB6CB /* Debug */,
+				3968B54D25C08008000CB6CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3968B56225C08043000CB6CB /* Build configuration list for PBXNativeTarget "DetoxIPCTestUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3968B56325C08043000CB6CB /* Debug */,
+				3968B56425C08043000CB6CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3968B52A25C08006000CB6CB /* Project object */;
+}
