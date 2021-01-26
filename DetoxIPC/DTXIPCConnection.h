@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The invalidation handler will also be called if a connection is invalidated from the remote side. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
 ///
 /// You may not send messages over the connection from within an invalidation handler block.
-/// 
+///
 /// The invalidationHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the DTXIPCConnection instance inside this block.
 @property(copy) void (^invalidationHandler)(void);
 
@@ -69,6 +69,9 @@ NS_ASSUME_NONNULL_BEGIN
 ///
 /// You must not send messages from multiple threads to synchronous proxies.
 - (id)synchronousRemoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
+
+/// All connections start suspended. You must resume them before they will start processing received messages or sending messages through the remoteObjectProxy.
+- (void)resume;
 
 /// Invalidate the connection. All outstanding error handling blocks will be called on the message handling queue. The connection must be invalidated before it is deallocated. After a connection is invalidated, no more messages may be sent or received.
 - (void)invalidate;

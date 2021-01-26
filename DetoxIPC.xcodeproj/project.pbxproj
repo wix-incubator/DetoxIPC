@@ -8,22 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		393A512C235729B400DFCEF5 /* DTXIPCBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 393A512B2357295F00DFCEF5 /* DTXIPCBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3968B57625C08211000CB6CB /* DTXIPCConnection-Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFE9233B895F001C84C3 /* DTXIPCConnection-Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3968B58025C0825A000CB6CB /* DetoxIPC.h in Headers */ = {isa = PBXBuildFile; fileRef = 3968B57D25C08235000CB6CB /* DetoxIPC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		397D3E41233A2A4000E69D28 /* DTXIPCConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		397D3E42233A2A4000E69D28 /* DTXIPCConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 397D3E40233A2A4000E69D28 /* DTXIPCConnection.m */; };
 		39B71FC024641E7400CC9A88 /* Swiftier.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B71FBF24641E7400CC9A88 /* Swiftier.h */; };
 		39B833DA233A7D7000DBC1D2 /* DetoxIPC.pch in Headers */ = {isa = PBXBuildFile; fileRef = 39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */; };
-		39B833DE233A920200DBC1D2 /* _DTXIPCDistantObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */; };
+		39B833DE233A920200DBC1D2 /* _DTXIPCDistantObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39B833DC233A920200DBC1D2 /* _DTXIPCDistantObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39B833DF233A920200DBC1D2 /* _DTXIPCDistantObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39B833DD233A920200DBC1D2 /* _DTXIPCDistantObject.m */; };
-		39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFE5233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h */; };
+		39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFE5233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39BEEFE8233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFE6233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		39BEEFEC233B994E001C84C3 /* _DTXIPCExportedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEA233B994E001C84C3 /* _DTXIPCExportedObject.h */; };
+		39BEEFEC233B994E001C84C3 /* _DTXIPCExportedObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEA233B994E001C84C3 /* _DTXIPCExportedObject.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39BEEFED233B994E001C84C3 /* _DTXIPCExportedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFEB233B994E001C84C3 /* _DTXIPCExportedObject.m */; };
-		39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEE233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h */; };
+		39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 39BEEFEE233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		39BEEFF1233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 39BEEFEF233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		393A512B2357295F00DFCEF5 /* DTXIPCBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTXIPCBase.h; sourceTree = "<group>"; };
+		3968B57D25C08235000CB6CB /* DetoxIPC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetoxIPC.h; sourceTree = "<group>"; };
 		3971742D233A38EE00FFE816 /* NSConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NSConnection.h; sourceTree = "<group>"; };
 		397D3E2A233A293D00E69D28 /* DetoxIPC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DetoxIPC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		397D3E2E233A293D00E69D28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,10 +77,8 @@
 		397D3E2C233A293D00E69D28 /* DetoxIPC */ = {
 			isa = PBXGroup;
 			children = (
-				397D3E2E233A293D00E69D28 /* Info.plist */,
-				39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */,
-				39B71FBF24641E7400CC9A88 /* Swiftier.h */,
 				397D3E44233A2DAB00E69D28 /* Apple */,
+				3968B57D25C08235000CB6CB /* DetoxIPC.h */,
 				393A512B2357295F00DFCEF5 /* DTXIPCBase.h */,
 				397D3E3F233A2A4000E69D28 /* DTXIPCConnection.h */,
 				39BEEFE9233B895F001C84C3 /* DTXIPCConnection-Private.h */,
@@ -90,6 +91,9 @@
 				39B833DD233A920200DBC1D2 /* _DTXIPCDistantObject.m */,
 				39BEEFEA233B994E001C84C3 /* _DTXIPCExportedObject.h */,
 				39BEEFEB233B994E001C84C3 /* _DTXIPCExportedObject.m */,
+				397D3E2E233A293D00E69D28 /* Info.plist */,
+				39B833D9233A7D7000DBC1D2 /* DetoxIPC.pch */,
+				39B71FBF24641E7400CC9A88 /* Swiftier.h */,
 			);
 			path = DetoxIPC;
 			sourceTree = "<group>";
@@ -112,10 +116,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				393A512C235729B400DFCEF5 /* DTXIPCBase.h in Headers */,
+				3968B57625C08211000CB6CB /* DTXIPCConnection-Private.h in Headers */,
 				39B833DE233A920200DBC1D2 /* _DTXIPCDistantObject.h in Headers */,
 				39BEEFE7233B87CF001C84C3 /* _DTXIPCRemoteBlockRegistry.h in Headers */,
 				39B833DA233A7D7000DBC1D2 /* DetoxIPC.pch in Headers */,
 				39BEEFF0233BA85C001C84C3 /* NSInvocation+DTXRemoteSerialization.h in Headers */,
+				3968B58025C0825A000CB6CB /* DetoxIPC.h in Headers */,
 				39B71FC024641E7400CC9A88 /* Swiftier.h in Headers */,
 				397D3E41233A2A4000E69D28 /* DTXIPCConnection.h in Headers */,
 				39BEEFEC233B994E001C84C3 /* _DTXIPCExportedObject.h in Headers */,
@@ -149,7 +155,7 @@
 		397D3E21233A293D00E69D28 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = LeoNatan;
 				TargetAttributes = {
 					397D3E29233A293D00E69D28 = {
@@ -227,6 +233,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -253,14 +260,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
@@ -293,6 +300,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -312,13 +320,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;

@@ -17,7 +17,8 @@ First, create a common protocol, which will be used to define the interface betw
 ```objc
 @protocol ExampleProtocol <NSObject>
 
-- (void)aComplexSelector:(NSUInteger)a b:(NSString*)str c:(void(^)(dispatch_block_t))block1 d:(void(^)(NSArray*))test;
+- (void)performOperationWithCompletionHandler:(dispatch_block_t)block;
+- (void)performOperationWithOptions:(NSDictionary*)options completionHandler:(NSDictionary* options)block;
 
 @end
 ```
@@ -28,16 +29,14 @@ On the server process, create an class which implements the common protocol you 
 @interface MyObject : NSObject <ExampleProtocol> @end
 @implementation MyObject
   
-- (void)aMoreComplexSelector:(NSUInteger)a b:(NSString*)str c:(void(^)(dispatch_block_t))block1 d:(void(^)(NSArray*))test
-{
-	if(block1 != nil)
-	{
-		block1(^ {
-			NSLog(@"from inner block");
-		});
-	}
-	
-	test(@[@"Hello", @123, @{@"Hi": @"There"}]);
+- (void)performOperationWithCompletionHandler:(dispatch_block_t)block {
+  NSLog(@"Called performOperationWithCompletionHandler:");
+  block();
+}
+
+- (void)performOperationWithOptions:(NSDictionary*)options completionHandler:(NSDictionary* options)block {
+  NSLog(@"Called performOperationWithOptions:completionHandler: with options: %@", options);
+  block(options);
 }
 
 @end
@@ -47,6 +46,8 @@ On the server process, create an class which implements the common protocol you 
 _connection = [[DTXIPCConnection alloc] initWithServiceName:@"MyService"];
 _connection.exportedInterface = [DTXIPCInterface interfaceWithProtocol:@protocol(ExampleProtocol)];
 _connection.exportedObject = [[MyObject alloc] init];
+
+[_connection resume];
 ```
 
 On the client process, connect to the registered named service, set the remote object interface and obtain a remote proxy object. You can now use this proxy object as if it is an instance of the remote object.
@@ -55,36 +56,34 @@ On the client process, connect to the registered named service, set the remote o
 _connection = [[DTXIPCConnection alloc] initWithServiceName:@"MyService"];
 _connection.remoteObjectInterface = [DTXIPCInterface interfaceWithProtocol:@protocol(ExampleProtocol)];
 
+[_connection resume];
+
 id<ExampleProtocol> remoteProxyObject = _connection.remoteObjectProxy;
-//A crazy example to demonstrate the capabilities of DTXIPC! 😂
-[remoteProxyObject aMoreComplexSelector:10 b:@"Hello World!" c:^ (dispatch_block_t block) {
-	NSLog(@"from first block");
-	
-	if(block)
-	{
-		block();
-	}
-} d:^(NSArray * arr) {
-	NSLog(@"from second block: %@", arr);
+
+[remoteProxyObject performOperationWithCompletionHandler:^{
+  NSLog("Completion handler called");
+}];
+
+[remoteProxyObject performOperationWithOptions:@{@"Test": @"Passed"} completionHandler:^ (NSDictionary* options) {
+  NSLog("Completion handler called with options: %@", options);
 }];
 ```
 
 The expected output on the server process should be:
 
 ```
-from inner block
+Called performOperationWithCompletionHandler:
+Called performOperationWithOptions:completionHandler: with options: {
+    Test = Passed;
+}
 ```
 
 
 And the client process:
 
 ```
-from first block
-from second block: (
-    Hello,
-    123,
-        {
-        Hi = There;
-    }
-)
+Completion handler called
+Completion handler called with options: {
+    Test = Passed;
+}
 ```

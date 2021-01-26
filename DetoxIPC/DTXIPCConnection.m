@@ -185,6 +185,8 @@ static dispatch_queue_t _connectionQueue;
 	dispatch_queue_t _dispatchQueue;
 	NSRunLoop* _runLoop;
 	NSString* _actualServiceName;
+	
+	BOOL _resumed;
 }
 
 - (void)_runQueue
@@ -192,6 +194,8 @@ static dispatch_queue_t _connectionQueue;
 	_runLoop = NSRunLoop.currentRunLoop;
 	
 	[_connection run];
+	
+	_resumed = YES;
 }
 
 - (BOOL)_commonInit
@@ -206,10 +210,6 @@ static dispatch_queue_t _connectionQueue;
 	[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_mainConnectionDidDie:) name:NSConnectionDidDieNotification object:_connection];
 	_connection.rootObject = self;
 	
-	dispatch_async(_dispatchQueue, ^{
-		[self _runQueue];
-	});
-	
 	return YES;
 }
 
@@ -218,22 +218,22 @@ static dispatch_queue_t _connectionQueue;
 	self = [super init];
 	if(self)
 	{
-		_serviceName = serviceName;
-		_actualServiceName = serviceName;
+		_serviceName = [serviceName copy];
+		_actualServiceName = _serviceName;
 		_slave = NO;
 		
-		_dispatchQueue = dispatch_queue_create([NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", serviceName].UTF8String, dispatch_queue_attr_make_with_autorelease_frequency(NULL, DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM));
+		_dispatchQueue = dispatch_queue_create([NSString stringWithFormat:@"com.wix.DTXIPCConnection:%@", _serviceName].UTF8String, dispatch_queue_attr_make_with_autorelease_frequency(NULL, DISPATCH_AUTORELEASE_FREQUENCY_WORK_ITEM));
 		
 		//Attempt becoming a master
 		if([self _commonInit] == NO)
 		{
-			_actualServiceName = [NSString stringWithFormat:@"%@.slave", serviceName];
+			_actualServiceName = [NSString stringWithFormat:@"%@.slave", _serviceName];
 			_slave = YES;
 			
 			//Attempt becoming the slave
-			NSAssert([self _commonInit] == YES, @"The service “%@” already has ", serviceName);
+			NSAssert([self _commonInit] == YES, @"The service “%@” already has two endpoints connected.", _serviceName);
 			
-			_otherConnection = [NSConnection connectionWithRegisteredName:serviceName host:nil];
+			_otherConnection = [NSConnection connectionWithRegisteredName:_serviceName host:nil];
 			[NSNotificationCenter.defaultCenter addObserver:self selector:@selector(_otherConnectionDidDie:) name:NSConnectionDidDieNotification object:_otherConnection];
 			[(id)_otherConnection.rootProxy _slaveDidConnectWithName:_actualServiceName];
 		}
@@ -271,6 +271,20 @@ static dispatch_queue_t _connectionQueue;
 	}
 }
 
+- (void)resume
+{
+	if(_resumed)
+	{
+		return;
+	}
+	
+	NSAssert(_exportedObject != nil || _remoteObjectInterface != nil, @"An exported object or a remote object interface must be set before resuming the connection.");
+	
+	dispatch_async(_dispatchQueue, ^{
+		[self _runQueue];
+	});
+}
+
 - (void)invalidate
 {
 	[_connection invalidate];
@@ -299,7 +313,8 @@ static dispatch_queue_t _connectionQueue;
 
 - (void)setExportedObject:(id)exportedObject
 {
-	NSParameterAssert(self.exportedInterface != nil);
+	NSAssert(self.exportedInterface != nil, @"Exported interface must be set before setting an exported object.");
+	NSAssert([exportedObject conformsToProtocol:self.exportedInterface.protocol], @"Exported object must confrom to the exported interface protocol.");
 	_exportedObject = exportedObject;
 }
 

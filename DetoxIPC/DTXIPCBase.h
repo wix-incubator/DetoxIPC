@@ -6,6 +6,8 @@
 //  Copyright © 2019 LeoNatan. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #define DTXIPC_DEPRECATED_API(x) __attribute__((deprecated(x)))
 
 extern NSErrorDomain const DTXIPCErrorDomain;
