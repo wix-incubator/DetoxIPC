@@ -39,6 +39,16 @@
 	rv->_pendingRemoteBlocks = [NSMutableArray new];
 	pthread_mutex_init(&(rv->_pendingMutex), NULL);
 	
+	NSString* className = [NSString stringWithFormat:@"_DTXIPCDistantObject_<%@>", NSStringFromProtocol(rv->_connection.remoteObjectInterface.protocol)];
+	Class cls = objc_getClass(className.UTF8String);
+	if(cls == nil)
+	{
+		cls = objc_allocateClassPair(_DTXIPCDistantObject.class, className.UTF8String, 0);
+		class_addProtocol(cls, rv->_connection.remoteObjectInterface.protocol);
+		objc_registerClassPair(cls);
+	}
+	object_setClass(rv, cls);
+	
 	return rv;
 }
 
